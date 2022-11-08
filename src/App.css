@@ -7,12 +7,12 @@ font-family: 'Ubuntu', sans-serif;
   padding: 0;
   margin: 0;
 }
-.carouuselScetion img{
+.carousel-item img{
   height: 70vh;
 }
 @media (max-width:660px) {
-  body{
-    background-color: red;
+  .carousel-item img{
+    height: 50vh;
   }
   
 }
