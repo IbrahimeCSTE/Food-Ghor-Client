@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import toast, { Toaster } from "react-hot-toast";
 const AddService = () => {
   const [img, setImg] = useState("");
   const [title, setTitle] = useState("");
@@ -18,7 +18,15 @@ const AddService = () => {
       body: JSON.stringify({ img, title, shortDes, longDes, rating, price }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        toast(data.msg);
+      });
+    setImg("");
+    setTitle("");
+    setShortDes("");
+    setLongDes("");
+    setRating("");
+    setPrice("");
   };
 
   return (
@@ -73,6 +81,7 @@ const AddService = () => {
           <button className="btn btn-dark form-control my-1">
             Add service
           </button>
+          <Toaster />
         </form>
       </div>
     </div>
