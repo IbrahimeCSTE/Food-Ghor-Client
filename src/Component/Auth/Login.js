@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import {
   GoogleAuthProvider,
@@ -14,6 +15,11 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const { auth, setLoading } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
   //console.log(from);
 
   const handleSubmit = (e) => {
@@ -54,7 +60,11 @@ const Login = () => {
         // The email of the user's account used.
       });
   };
-
+  useEffect(() => {
+    if (logUser) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, from, logUser]);
   return (
     <div className="container my-5">
       <div className="card p-4">
@@ -76,7 +86,7 @@ const Login = () => {
             placeholder="Enter your password"
           />
           <button className=" my-2 form-control btn btn-info">Login</button>
-          <ToastContainer />
+          <Toaster />
         </form>
         <div className="otherLoginSystem">
           <button
