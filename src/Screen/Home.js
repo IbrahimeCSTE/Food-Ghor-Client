@@ -22,7 +22,7 @@ const Home = () => {
         <h3>Servicess</h3>
         <hr />
         <div className="row mt-3">
-          <div className="col-md-1">
+          <div className="col-md-2">
             <h4>Filter</h4>
             <div class="form-check">
               <input
@@ -37,11 +37,11 @@ const Home = () => {
               </label>
             </div>
           </div>
-          <div className="col-md-9">
+          <div className="col-md-8">
             <div className="row">
               {services.length > 0 ? (
                 services.map((item) => (
-                  <div className="col-md-4">
+                  <div className="col-md-6">
                     <div className="card">
                       <img
                         src={item.img}
