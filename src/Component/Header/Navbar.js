@@ -53,21 +53,31 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/add-service">
-                Add-Service
-              </Link>
+              {user && (
+                <Link className="nav-link" to="/my-review">
+                  My Review
+                </Link>
+              )}
+            </li>
+            <li className="nav-item">
+              {user && (
+                <Link className="nav-link" to="/add-service">
+                  Add-Service
+                </Link>
+              )}
             </li>
             <li className="nav-item">
               {user ? (
                 <button
                   onClick={logOutUser}
-                  className="btn btn-secondary btn-sm"
+                  title={user?.displayName}
+                  className="btn mt-1 btn-secondary btn-sm"
                 >
                   Logout
                 </button>
               ) : (
                 <Link className="nav-link" to="/user/login">
-                  Login
+                  <i className="fas mx-1 fa-sign-in-alt"></i> Login
                 </Link>
               )}
             </li>

@@ -9,6 +9,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+
 import { AuthContext } from "../AuthProvider/AuthProvider";
 const Register = () => {
   const { auth } = useContext(AuthContext);
@@ -53,10 +54,8 @@ const Register = () => {
         setName("");
         setEmail("");
         setPassword("");
-        if (user.emailVerified) {
-          setLogUser(true);
-          toast("Login Successfuly");
-        }
+        setProfileImg("");
+        setLogUser(true);
       })
       .catch((error) => {
         //const errorCode = error.code;
