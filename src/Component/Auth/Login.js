@@ -10,6 +10,7 @@ import {
 
 const Login = () => {
   const googleProvider = new GoogleAuthProvider();
+
   const [email, setEmail] = useState("");
   const [logUser, setLogUser] = useState(false);
   const [password, setPassword] = useState("");
@@ -91,8 +92,9 @@ const Login = () => {
         <div className="otherLoginSystem">
           <button
             onClick={googleSignIn}
-            className=" my-2 form-control btn btn-primary"
+            className=" my-2 form-control btn btn-dark"
           >
+            <i className="fab mx-2 fa-google"></i>
             Google
           </button>
         </div>

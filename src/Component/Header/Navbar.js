@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+
 const Navbar = () => {
+  const { user, setLoading, auth } = useContext(AuthContext);
+  const logOutUser = () => {
+    setLoading(true);
+    signOut(auth)
+      .then(() => {
+        toast("Logout successfuly");
+        window.location = "/";
+      })
+      .catch((error) => {
+        toast(error.massage);
+      });
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-1">
@@ -42,12 +58,22 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
+              {user ? (
+                <button
+                  onClick={logOutUser}
+                  className="btn btn-secondary btn-sm"
+                >
+                  Logout
+                </button>
+              ) : (
+                <Link className="nav-link" to="/user/login">
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
+        <Toaster />
       </nav>
     </div>
   );

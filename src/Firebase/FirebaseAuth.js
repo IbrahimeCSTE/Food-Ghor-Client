@@ -1,15 +1,15 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_apiKey,
-  authDomain: process.env.REACT_APP_authDomain,
-  projectId: process.env.REACT_APP_projectId,
-  storageBucket: process.env.REACT_APP_storageBucket,
-  messagingSenderId: process.env.REACT_APP_messagingSenderId,
-  appId: process.env.REACT_APP_appId,
+  apiKey: "AIzaSyCkkBD__tKWBgNOh4Ba0nH8qvsZ6nTWFQI",
+  authDomain: "foodghor-c2284.firebaseapp.com",
+  projectId: "foodghor-c2284",
+  storageBucket: "foodghor-c2284.appspot.com",
+  messagingSenderId: "760904727978",
+  appId: "1:760904727978:web:2d6cbdff720ad2b6c53fd3",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
 export default app;

@@ -5,6 +5,9 @@ import Home from "./Screen/Home";
 import AddService from "./Component/Admin/AddService";
 import Services from "./Screen/Services";
 import SingleFood from "./Screen/SingleFood";
+import PrivateRouter from "./Component/Router/PrivateRouter";
+import Login from "./Component/Auth/Login";
+import Register from "./Component/Auth/Register";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,7 +31,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/add-service",
-        element: <AddService />,
+        element: (
+          <PrivateRouter>
+            <AddService />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/user/login",
+        element: <Login />,
+      },
+      {
+        path: "/user/register",
+        element: <Register />,
       },
     ],
   },
