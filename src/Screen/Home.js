@@ -19,24 +19,13 @@ const Home = () => {
             <h4>Filter</h4>
             <div class="form-check">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
                 value=""
                 id="flexCheckDefault"
               />
               <label class="form-check-label" for="flexCheckDefault">
                 Price
-              </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                value=""
-                id="flexCheckDefault"
-              />
-              <label class="form-check-label" for="flexCheckDefault">
-                Rating
               </label>
             </div>
           </div>
