@@ -39,11 +39,15 @@ const Home = () => {
           </div>
           <div className="col-md-9">
             <div className="row">
-              {services &&
+              {services.length > 0 ? (
                 services.map((item) => (
                   <div className="col-md-4">
                     <div className="card">
-                      <img src={item.img} class="card-img-top" alt="food" />
+                      <img
+                        src={item.img}
+                        className="card-img-top img-fluid"
+                        alt="food"
+                      />
                       <div className="card-body">
                         <h4 className="card-title">{item.title}</h4>
                         <h5>Price:{item.price} Tk</h5>
@@ -58,7 +62,12 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                ))}
+                ))
+              ) : (
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              )}
             </div>
           </div>
           <div className="col-md-2">
@@ -74,7 +83,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="seeAllbtn text-center mb-5">
+      <div
+        className={
+          services.length > 0 ? "seeAllbtn text-center mb-5" : "d-none"
+        }
+      >
         <Link to="/services" className="nav-link">
           <button className="btn btn-outline-secondary">See all</button>
         </Link>
