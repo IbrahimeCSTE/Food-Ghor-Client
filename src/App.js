@@ -4,6 +4,7 @@ import Main from "./Layout/Main";
 import Home from "./Screen/Home";
 import AddService from "./Component/Admin/AddService";
 import Services from "./Screen/Services";
+import SingleFood from "./Screen/SingleFood";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,6 +19,11 @@ const router = createBrowserRouter([
         path: "/services",
 
         element: <Services />,
+      },
+      {
+        path: "/single-food/:id",
+
+        element: <SingleFood />,
       },
       {
         path: "/add-service",

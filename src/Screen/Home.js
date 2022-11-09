@@ -3,11 +3,18 @@ import CarouselMenu from "../Component/Header/Carousel";
 import { Link } from "react-router-dom";
 const Home = () => {
   const [services, setServices] = useState([]);
+  const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
     fetch("http://localhost:5000/api/food?qrt=3")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
+  if (priceOrder) {
+    services.sort((a, b) => (a.price > b.price ? 1 : -1));
+  }
+  if (!priceOrder) {
+    services.sort((a, b) => (a.price > b.price ? -1 : 1));
+  }
   return (
     <div>
       <CarouselMenu />
@@ -20,12 +27,13 @@ const Home = () => {
             <div class="form-check">
               <input
                 className="form-check-input"
+                onClick={() => setPriceOrder(!priceOrder)}
                 type="checkbox"
                 value=""
                 id="flexCheckDefault"
               />
               <label class="form-check-label" for="flexCheckDefault">
-                Price
+                Low Price
               </label>
             </div>
           </div>
@@ -34,17 +42,19 @@ const Home = () => {
               {services &&
                 services.map((item) => (
                   <div className="col-md-4">
-                    <div class="card">
-                      <img src="..." class="card-img-top" alt="..." />
-                      <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">
-                          Some quick example text to build on the card title and
-                          make up the bulk of the card's content.
-                        </p>
-                        <a href="#" class="btn btn-primary">
-                          Go somewhere
-                        </a>
+                    <div className="card">
+                      <img src={item.img} class="card-img-top" alt="food" />
+                      <div className="card-body">
+                        <h4 className="card-title">{item.title}</h4>
+                        <h5>Price:{item.price} Tk</h5>
+                        <h5>Rating:{item.rating}</h5>
+                        <p className="card-text">{item.shortDes}</p>
+                        <Link
+                          to={`/single-food/${item._id}`}
+                          className="btn btn-primary"
+                        >
+                          View Details
+                        </Link>
                       </div>
                     </div>
                   </div>
