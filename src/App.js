@@ -22,7 +22,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/single-food/:id",
-
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/food/${params.id}`),
         element: <SingleFood />,
       },
       {
