@@ -6,6 +6,7 @@ const Services = () => {
   const [services, setServices] = useState([]);
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
+    window.document.title = "FoodGhor-Services";
     fetch("http://localhost:5000/api/food")
       .then((res) => res.json())
       .then((data) => setServices(data));

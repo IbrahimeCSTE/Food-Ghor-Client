@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Blog = () => {
+  useEffect(() => {
+    window.document.title = "FoodGhor-Blog";
+  }, []);
   return (
     <div className="container my-5">
       <div className="card">

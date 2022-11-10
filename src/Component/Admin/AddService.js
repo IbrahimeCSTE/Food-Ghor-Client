@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 const AddService = () => {
   const [img, setImg] = useState("");
@@ -28,7 +28,9 @@ const AddService = () => {
     setRating("");
     setPrice("");
   };
-
+  useEffect(() => {
+    window.document.title = "FoodGhor-Add";
+  }, []);
   return (
     <div className="container my-5">
       <div>

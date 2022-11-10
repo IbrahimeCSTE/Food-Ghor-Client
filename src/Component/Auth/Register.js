@@ -78,6 +78,7 @@ const Register = () => {
       });
   };
   useEffect(() => {
+    window.document.title = "FoodGhor-Register";
     if (logUser) {
       navigate(from, { replace: true });
     }

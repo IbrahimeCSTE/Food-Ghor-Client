@@ -39,6 +39,7 @@ const MyReview = () => {
     seteditReview("");
   };
   useEffect(() => {
+    window.document.title = "FoodGhor-Review";
     fetch("http://localhost:5000/api/review")
       .then((res) => res.json())
       .then((data) => setAllReview(data.reverse()));

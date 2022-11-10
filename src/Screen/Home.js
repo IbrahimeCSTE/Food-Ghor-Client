@@ -6,6 +6,7 @@ const Home = () => {
   const [services, setServices] = useState([]);
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
+    window.document.title = "FoodGhor-Home";
     fetch("http://localhost:5000/api/food?qrt=3")
       .then((res) => res.json())
       .then((data) => setServices(data.reverse()));
