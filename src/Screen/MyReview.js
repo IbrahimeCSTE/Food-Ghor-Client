@@ -43,6 +43,7 @@ const MyReview = () => {
       .then((res) => res.json())
       .then((data) => setAllReview(data.reverse()));
   }, [deleteReview, reviewEditConfirm]);
+
   const myReview = allReview.filter((dt) => dt.email === user?.email);
 
   return (
