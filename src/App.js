@@ -8,6 +8,7 @@ import SingleFood from "./Screen/SingleFood";
 import PrivateRouter from "./Component/Router/PrivateRouter";
 import Login from "./Component/Auth/Login";
 import Register from "./Component/Auth/Register";
+import MyReview from "./Screen/MyReview";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
         path: "/services",
 
         element: <Services />,
+      },
+      {
+        path: "/my-review",
+
+        element: <MyReview />,
       },
       {
         path: "/single-food/:id",

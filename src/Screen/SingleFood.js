@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../Component/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -8,8 +8,9 @@ const SingleFood = () => {
   const [review, setReview] = useState("");
   const [allReview, setAllReview] = useState([]);
 
-  const { auth } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const data = useLoaderData();
+  // console.log(user);
   const addReview = () => {
     //console.log(auth.currentUser.displayName);
     fetch("http://localhost:5000/api/review", {
@@ -20,8 +21,10 @@ const SingleFood = () => {
       body: JSON.stringify({
         review,
         reviewId: data._id,
-        name: auth.currentUser.displayName,
-        photo: auth.currentUser.photoURL,
+        name: user.displayName,
+        photo: user.photoURL,
+        email: user.email,
+        food: data.title,
       }),
     })
       .then((res) => res.json())
@@ -34,7 +37,7 @@ const SingleFood = () => {
     fetch("http://localhost:5000/api/review")
       .then((res) => res.json())
       .then((data) => setAllReview(data.reverse()));
-  }, [review]);
+  }, [addReview]);
   const PostReview = allReview.filter((dt) => dt.reviewId === id);
   //console.log(PostReview);
   return (
@@ -52,15 +55,31 @@ const SingleFood = () => {
         <div className="col-md-1"></div>
         <div className="col-md-4">
           <div className="reviewField">
-            <input
-              value={review}
-              onChange={(e) => setReview(e.target.value)}
-              className="form-control"
-              placeholder="Type Review..."
-            ></input>
-            <button onClick={addReview} className="btn btn-info my-2">
-              Add
-            </button>
+            <div className="reviewBtn">
+              {user ? (
+                <div>
+                  <textarea
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    className="form-control"
+                    placeholder="Type Review..."
+                  ></textarea>
+                  <button onClick={addReview} className="btn btn-info my-2">
+                    Add
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <h4>
+                    Please{" "}
+                    <Link className="mx-1" to="/user/login">
+                      Login
+                    </Link>
+                    to add a review
+                  </h4>
+                </div>
+              )}
+            </div>
             <Toaster />
             <div className="showReview my-3">
               {PostReview.length > 0

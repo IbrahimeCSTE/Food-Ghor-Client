@@ -30,7 +30,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         // console.log(user);
-        if (user.emailVerified) {
+        if (user) {
           setLogUser(true);
           setLoading(false);
           toast("Login Successfuly");
