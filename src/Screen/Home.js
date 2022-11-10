@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import CarouselMenu from "../Component/Header/Carousel";
 import { Link } from "react-router-dom";
 import Footer from "../Component/Footer/Footer";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 const Home = () => {
   const [services, setServices] = useState([]);
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
     window.document.title = "FoodGhor-Home";
-    fetch("http://localhost:5000/api/food?qrt=3")
+    fetch("https://server-ibrahimecste.vercel.app/api/food?qrt=3")
       .then((res) => res.json())
-      .then((data) => setServices(data.reverse()));
-  }, []);
+      .then((data) => setServices(data));
+  }, [priceOrder]);
   if (priceOrder) {
     services.sort((a, b) => (a.price > b.price ? 1 : -1));
   }
-  if (!priceOrder) {
-    services.sort((a, b) => (a.price > b.price ? -1 : 1));
-  }
+
   return (
     <div>
       <CarouselMenu />
@@ -45,12 +45,16 @@ const Home = () => {
                 {services.length > 0 ? (
                   services.map((item) => (
                     <div className="col-md-6">
-                      <div className="card">
-                        <img
-                          src={item.img}
-                          className="card-img-top img-fluid"
-                          alt="food"
-                        />
+                      <div className="card my-3 cardImg">
+                        <PhotoProvider>
+                          <PhotoView src={item.img}>
+                            <img
+                              src={item.img}
+                              class="card-img-top img-fluid"
+                              alt="food"
+                            />
+                          </PhotoView>
+                        </PhotoProvider>
                         <div className="card-body">
                           <h4 className="card-title">{item.title}</h4>
                           <h5>Price:{item.price} Tk</h5>
@@ -82,7 +86,8 @@ const Home = () => {
               <h5 className="my-2">
                 <i className="fas mr-1 fa-map-marker-alt"></i>Mirpur,10
               </h5>
-              <h5>Zip:1234</h5>
+              <h6>Zip:1234</h6>
+              <h6>Mob:+12457</h6>
             </div>
           </div>
         </div>

@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import { AuthContext } from "../Component/AuthProvider/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
-
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 const SingleFood = () => {
   const { id } = useParams();
   const [review, setReview] = useState("");
@@ -13,7 +14,7 @@ const SingleFood = () => {
   // console.log(user);
   const addReview = () => {
     //console.log(auth.currentUser.displayName);
-    fetch("http://localhost:5000/api/review", {
+    fetch("https://server-ibrahimecste.vercel.app/api/review", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,7 @@ const SingleFood = () => {
     setReview("");
   };
   useEffect(() => {
-    fetch("http://localhost:5000/api/review")
+    fetch("https://server-ibrahimecste.vercel.app/api/review")
       .then((res) => res.json())
       .then((data) => setAllReview(data.reverse()));
   }, [addReview]);
@@ -47,7 +48,12 @@ const SingleFood = () => {
       <div className="row mt-2 singleFood">
         <div className="col-md-7 card p-3">
           <h4>{data.title}</h4>
-          <img src={data.img} className="img-fluid my-3" alt="" />
+          <PhotoProvider>
+            <PhotoView src={data.img}>
+              <img src={data.img} class="card-img-top img-fluid" alt="food" />
+            </PhotoView>
+          </PhotoProvider>
+
           <h5>Price:{data.price} Tk</h5>
           <h5>Rating:{data.rating}</h5>
           <p>{data.longDes}</p>

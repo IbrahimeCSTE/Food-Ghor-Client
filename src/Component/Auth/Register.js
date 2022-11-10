@@ -30,9 +30,20 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         setLogUser(true);
-        toast("Login Successfuly");
-        navigate(from, { replace: true });
-        // ...
+        fetch("https://server-ibrahimecste.vercel.app/api/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("userToken", JSON.stringify(data.token));
+            toast(data.msg);
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -50,7 +61,23 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        // console.log(user.email);
         updateUserProfile();
+        fetch("https://server-ibrahimecste.vercel.app/api/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("userToken", JSON.stringify(data.token));
+            toast(data.msg);
+          });
+
         setName("");
         setEmail("");
         setPassword("");

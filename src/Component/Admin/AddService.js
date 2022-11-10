@@ -10,12 +10,20 @@ const AddService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/food", {
+    fetch("https://server-ibrahimecste.vercel.app/api/food", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ img, title, shortDes, longDes, rating, price }),
+      body: JSON.stringify({
+        img,
+        title,
+        shortDes,
+        longDes,
+        rating,
+        price,
+        time: new Date(),
+      }),
     })
       .then((res) => res.json())
       .then((data) => {

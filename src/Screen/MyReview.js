@@ -6,17 +6,23 @@ const MyReview = () => {
   const [editReview, seteditReview] = useState("");
   const [editForm, setEditForm] = useState(false);
   const [editReviewId, setEditReviewId] = useState("");
+  const [errMsg, setMsg] = useState("");
+
   const { user } = useContext(AuthContext);
 
   const deleteReview = (id) => {
     // console.log(id);
-    fetch(`http://localhost:5000/api/review/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        toast(data.msg);
-      });
+    if (window.confirm("Are You Sure?")) {
+      fetch(`https://server-ibrahimecste.vercel.app/api/review/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          toast(data.msg);
+        });
+    } else {
+      return;
+    }
   };
   const editReviewBtn = (id, RealReview) => {
     setEditForm(true);
@@ -25,7 +31,7 @@ const MyReview = () => {
     // console.log(id, RealReview);
   };
   const reviewEditConfirm = () => {
-    fetch(`http://localhost:5000/api/review/${editReviewId}`, {
+    fetch(`https://server-ibrahimecste.vercel.app/api/review/${editReviewId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -40,12 +46,24 @@ const MyReview = () => {
   };
   useEffect(() => {
     window.document.title = "FoodGhor-Review";
-    fetch("http://localhost:5000/api/review")
+    fetch(
+      `https://server-ibrahimecste.vercel.app/api/myreview?email=${user?.email}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${JSON.parse(
+            localStorage.getItem("userToken")
+          )}`,
+        },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => setAllReview(data.reverse()));
-  }, [deleteReview, reviewEditConfirm]);
-
-  const myReview = allReview.filter((dt) => dt.email === user?.email);
+      .then((data) => {
+        setMsg(data.msg);
+        //toast(data.msg);
+        setAllReview(data?.reverse());
+      });
+  }, [deleteReview, editReview]);
 
   return (
     <div className="container my-5">
@@ -67,7 +85,7 @@ const MyReview = () => {
         )}
       </div>
       <div>
-        {myReview.length > 0 ? (
+        {allReview.length > 0 ? (
           <table className="table table-dark">
             <thead>
               <tr>
@@ -78,8 +96,8 @@ const MyReview = () => {
               </tr>
             </thead>
             <tbody>
-              {myReview &&
-                myReview.map((mrv, idx) => (
+              {allReview &&
+                allReview.map((mrv, idx) => (
                   <tr key={idx}>
                     <th scope="row">{mrv.food}</th>
                     <td>{mrv.review}</td>
@@ -104,8 +122,10 @@ const MyReview = () => {
                 ))}
             </tbody>
           </table>
+        ) : errMsg ? (
+          <h1 className="text-center my-5">{errMsg}</h1>
         ) : (
-          <h3 className="text-center mt-5">No Review</h3>
+          <h1 className="text-center my-5">No Review</h1>
         )}
       </div>
     </div>

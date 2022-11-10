@@ -7,16 +7,14 @@ const Services = () => {
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
     window.document.title = "FoodGhor-Services";
-    fetch("http://localhost:5000/api/food")
+    fetch("https://server-ibrahimecste.vercel.app/api/food")
       .then((res) => res.json())
       .then((data) => setServices(data));
-  }, []);
+  }, [priceOrder]);
   if (priceOrder) {
     services.sort((a, b) => (a.price > b.price ? 1 : -1));
   }
-  if (!priceOrder) {
-    services.sort((a, b) => (a.price > b.price ? -1 : 1));
-  }
+
   return (
     <div className="services container my-4">
       <h3>Servicess</h3>
@@ -41,8 +39,8 @@ const Services = () => {
           <div className="row">
             {services.length > 0 ? (
               services.map((item) => (
-                <div className="col-md-4">
-                  <div className="card">
+                <div className="col-md-4 cardImg">
+                  <div className="card my-2">
                     <PhotoProvider>
                       <PhotoView src={item.img}>
                         <img

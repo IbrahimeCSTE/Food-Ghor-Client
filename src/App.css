@@ -25,7 +25,10 @@ font-family: 'Ubuntu', sans-serif;
   height: 80px;
   border-radius: 40px;
 }
-
+.cardImg img{
+  max-height: 300px;
+  min-height: 300px;
+}
 
 @media (max-width:660px) {
   .carousel-item img{
