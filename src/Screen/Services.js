@@ -7,7 +7,7 @@ const Services = () => {
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
     window.document.title = "FoodGhor-Services";
-    fetch("https://server-ibrahimecste.vercel.app/api/food")
+    fetch("https://server-gamma-ochre.vercel.app/api/food")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, [priceOrder]);

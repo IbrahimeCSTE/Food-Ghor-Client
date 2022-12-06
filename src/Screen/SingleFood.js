@@ -7,6 +7,7 @@ import "react-photo-view/dist/react-photo-view.css";
 const SingleFood = () => {
   const { id } = useParams();
   const [review, setReview] = useState("");
+  const [reviewNo, setReviewNo] = useState("");
   const [allReview, setAllReview] = useState([]);
 
   const { user } = useContext(AuthContext);
@@ -14,7 +15,7 @@ const SingleFood = () => {
   // console.log(user);
   const addReview = () => {
     //console.log(auth.currentUser.displayName);
-    fetch("https://server-ibrahimecste.vercel.app/api/review", {
+    fetch("https://server-gamma-ochre.vercel.app/api/review", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,8 +35,11 @@ const SingleFood = () => {
       });
     setReview("");
   };
+  const addReviewNo = () => {
+    console.log(reviewNo);
+  };
   useEffect(() => {
-    fetch("https://server-ibrahimecste.vercel.app/api/review")
+    fetch("https://server-gamma-ochre.vercel.app/api/review")
       .then((res) => res.json())
       .then((data) => setAllReview(data.reverse()));
   }, [addReview]);
@@ -57,6 +61,7 @@ const SingleFood = () => {
           <h5>Price:{data.price} Tk</h5>
           <h5>Rating:{data.rating}</h5>
           <p>{data.longDes}</p>
+          <button className="btn cartBtn">Add To Cart</button>
         </div>
         <div className="col-md-1"></div>
         <div className="col-md-4">
@@ -111,6 +116,25 @@ const SingleFood = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="reviewOption my-5">
+        <h4 className="mb-4">Give Your Review</h4>
+        <select
+          onChange={(e) => setReviewNo(e.target.value)}
+          className="form-select w-50"
+          aria-label="Default select example"
+        >
+          <option disabled selected>
+            select Review
+          </option>
+          <option value="2">Two Star</option>
+          <option value="3">Three Stat</option>
+          <option value="4">Four Star</option>
+          <option value="5">Five Star</option>
+        </select>
+        <button onClick={addReviewNo} className="btn btn-info my-2">
+          Add
+        </button>
       </div>
     </div>
   );

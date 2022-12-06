@@ -10,7 +10,7 @@ const AddService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("https://server-ibrahimecste.vercel.app/api/food", {
+    fetch("https://server-gamma-ochre.vercel.app/api/food", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

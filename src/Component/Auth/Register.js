@@ -30,7 +30,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         setLogUser(true);
-        fetch("https://server-ibrahimecste.vercel.app/api/user/register", {
+        fetch("https://server-gamma-ochre.vercel.app/api/user/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const Register = () => {
         const user = userCredential.user;
         // console.log(user.email);
         updateUserProfile();
-        fetch("https://server-ibrahimecste.vercel.app/api/user/register", {
+        fetch("https://server-gamma-ochre.vercel.app/api/user/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

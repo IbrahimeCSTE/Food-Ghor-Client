@@ -26,13 +26,46 @@ font-family: 'Ubuntu', sans-serif;
   border-radius: 40px;
 }
 .cardImg img{
-  max-height: 300px;
-  min-height: 300px;
+  /* max-height: 300px;
+  min-height: 300px; */
+  max-height: 25vh;
+  min-height: 25vh;
+}
+.navMenuBar{
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.nav-link{
+  color: rgb(239, 227, 227);
+}
+.fa-shopping-cart{
+  color: orange;
+  font-size: 22px;
+  cursor: pointer;
+}
+.addToCart{
+  display: flex;
+  justify-content: space-between;
+
+}
+.cartBtn{
+  background-color: rgb(235, 156, 10);
+  color: black;
 }
 
-@media (max-width:660px) {
+
+
+
+@media (max-width:662px) {
   .carousel-item img{
     height: 50vh;
+  }
+  .serviceCard{
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+   
   }
   
 }

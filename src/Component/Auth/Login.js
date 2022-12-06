@@ -33,7 +33,7 @@ const Login = () => {
         if (user) {
           setLogUser(true);
           setLoading(false);
-          fetch("https://server-ibrahimecste.vercel.app/api/user/login", {
+          fetch("https://server-gamma-ochre.vercel.app/api/user/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const Login = () => {
         const user = result.user;
         setLogUser(true);
         setLoading(false);
-        fetch("https://server-ibrahimecste.vercel.app/api/user/login", {
+        fetch("https://server-gamma-ochre.vercel.app/api/user/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

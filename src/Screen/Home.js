@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import Footer from "../Component/Footer/Footer";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 const Home = () => {
   const [services, setServices] = useState([]);
   const [priceOrder, setPriceOrder] = useState(false);
   useEffect(() => {
     window.document.title = "FoodGhor-Home";
-    fetch("https://server-ibrahimecste.vercel.app/api/food?qrt=3")
+    fetch("https://server-gamma-ochre.vercel.app/api/food?qrt=6")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, [priceOrder]);
@@ -40,34 +41,51 @@ const Home = () => {
                 </label>
               </div>
             </div>
-            <div className="col-md-8">
-              <div className="row">
+            <div className="col-md-10">
+              <div className="row serviceCard">
                 {services.length > 0 ? (
-                  services.map((item) => (
-                    <div className="col-md-6">
-                      <div className="card my-3 cardImg">
-                        <PhotoProvider>
-                          <PhotoView src={item.img}>
-                            <img
-                              src={item.img}
-                              class="card-img-top img-fluid"
-                              alt="food"
-                            />
-                          </PhotoView>
-                        </PhotoProvider>
-                        <div className="card-body">
-                          <h4 className="card-title">{item.title}</h4>
-                          <h5>Price:{item.price} Tk</h5>
-                          <h5>Rating:{item.rating}</h5>
-                          <p className="card-text">{item.shortDes}</p>
-                          <Link
-                            to={`/single-food/${item._id}`}
-                            className="btn btn-primary"
-                          >
-                            View Details
-                          </Link>
+                  services.map((item, idx) => (
+                    <div key={idx} className="col-md-4 ">
+                      <AnimationOnScroll
+                        animateIn={
+                          idx & 1
+                            ? "animate__fadeInRightBig"
+                            : "animate__fadeInLeftBig"
+                        }
+                      >
+                        <div className="card my-3 cardImg">
+                          <PhotoProvider>
+                            <PhotoView src={item.img}>
+                              <img
+                                src={item.img}
+                                className="card-img-top img-fluid"
+                                alt="food"
+                              />
+                            </PhotoView>
+                          </PhotoProvider>
+                          <div className="card-body">
+                            <h4 className="card-title">{item.title}</h4>
+                            <h5>Price:{item.price} Tk</h5>
+                            <h5>Rating:{item.rating}</h5>
+                            <div className="addToCart">
+                              <div>
+                                <Link
+                                  to={`/single-food/${item._id}`}
+                                  className="btn btn-sm btn-primary"
+                                >
+                                  View Details
+                                </Link>
+                              </div>
+                              <div>
+                                <i
+                                  title="Add To Cart"
+                                  className="fas fa-shopping-cart"
+                                ></i>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      </AnimationOnScroll>
                     </div>
                   ))
                 ) : (
@@ -76,18 +94,6 @@ const Home = () => {
                   </div>
                 )}
               </div>
-            </div>
-            <div className="col-md-2">
-              <img
-                src="https://images.prothomalo.com/prothomalo-english%2Fimport%2Fmedia%2F2016%2F08%2F08%2F5a3e16894259ea9075e6f0c8003891ae-dhaka.gif?auto=format%2Ccompress&format=webp&w=400&dpr=2.6"
-                className="img-fluid"
-                alt=""
-              />
-              <h5 className="my-2">
-                <i className="fas mr-1 fa-map-marker-alt"></i>Mirpur,10
-              </h5>
-              <h6>Zip:1234</h6>
-              <h6>Mob:+12457</h6>
             </div>
           </div>
         </div>

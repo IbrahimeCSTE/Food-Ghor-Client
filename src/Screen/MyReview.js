@@ -13,7 +13,7 @@ const MyReview = () => {
   const deleteReview = (id) => {
     // console.log(id);
     if (window.confirm("Are You Sure?")) {
-      fetch(`https://server-ibrahimecste.vercel.app/api/review/${id}`, {
+      fetch(`https://server-gamma-ochre.vercel.app/api/review/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -31,7 +31,7 @@ const MyReview = () => {
     // console.log(id, RealReview);
   };
   const reviewEditConfirm = () => {
-    fetch(`https://server-ibrahimecste.vercel.app/api/review/${editReviewId}`, {
+    fetch(`https://server-gamma-ochre.vercel.app/api/review/${editReviewId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const MyReview = () => {
   useEffect(() => {
     window.document.title = "FoodGhor-Review";
     fetch(
-      `https://server-ibrahimecste.vercel.app/api/myreview?email=${user?.email}`,
+      `https://server-gamma-ochre.vercel.app/api/myreview?email=${user?.email}`,
       {
         method: "GET",
         headers: {
